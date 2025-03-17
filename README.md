@@ -1,107 +1,152 @@
-# Knowledge Graph for RAG Applications
+# Knowledge Graph RAG System
 
-This project demonstrates the implementation and use of knowledge graphs in Retrieval Augmented Generation (RAG) applications. It serves both as a learning resource and a practical implementation guide.
+A powerful system that combines Knowledge Graphs with Retrieval Augmented Generation (RAG) to build intelligent question-answering systems from unstructured text data.
 
-## Project Overview
+## Features
 
-This project aims to:
-1. Demonstrate how knowledge graphs enhance RAG applications
-2. Provide practical examples of knowledge graph implementation
-3. Show how to explain complex concepts to business users
-4. Offer a hands-on learning experience
+- **Knowledge Graph Construction**: Automatically builds knowledge graphs from unstructured text
+- **Entity Recognition**: Identifies entities (people, organizations, dates, locations, etc.)
+- **Relationship Extraction**: Discovers relationships between entities using NLP
+- **Semantic Search**: Uses embeddings for intelligent information retrieval
+- **Natural Language Answers**: Generates human-readable responses to questions
+- **Visualization**: Provides visual representation of the knowledge graph
 
 ## Project Structure
 
 ```
 knowledgegraph/
 ├── src/
-│   ├── core/              # Core implementation
-│   │   ├── graph/        # Knowledge graph implementation
-│   │   ├── rag/          # RAG system components
-│   │   └── utils/        # Utility functions
-│   ├── examples/         # Example implementations
-│   │   ├── basic/       # Simple examples
-│   │   └── advanced/    # Complex use cases
-│   └── docs/            # Documentation
-│       ├── concepts/    # Core concepts
-│       └── tutorials/   # Step-by-step guides
-├── tests/               # Test files
-└── data/               # Sample data and datasets
+│   ├── core/           # Core knowledge graph functionality
+│   ├── examples/       # Example implementations
+│   │   └── basic/     # Basic examples
+│   └── docs/          # Documentation
+│       └── concepts/  # Knowledge graph concepts
+├── requirements.txt   # Python dependencies
+└── README.md         # This file
 ```
 
-## Learning Path
+## Installation
 
-### 1. Fundamentals
-- Understanding Knowledge Graphs
-  - Nodes and Edges
-  - Properties and Relationships
-  - Graph Databases
-- RAG Basics
-  - Components of RAG
-  - Traditional RAG vs Graph-Enhanced RAG
-  - Use Cases and Benefits
+1. Clone the repository:
+```bash
+git clone https://github.com/YourUsername/knowledgegraph.git
+cd knowledgegraph
+```
 
-### 2. Implementation
-- Building Knowledge Graphs
-  - Data Modeling
-  - Graph Construction
-  - Storage and Retrieval
-- Integrating with RAG
-  - Graph-Based Retrieval
-  - Context Enhancement
-  - Query Processing
+2. Create and activate a virtual environment:
+```bash
+python -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+```
 
-### 3. Business Applications
-- Use Cases
-  - Document Q&A
-  - Knowledge Management
-  - Decision Support
-- ROI and Benefits
-  - Performance Metrics
-  - Cost Considerations
-  - Implementation Challenges
+3. Install dependencies:
+```bash
+pip install -r requirements.txt
+python -m spacy download en_core_web_sm
+```
 
-## Getting Started
+## Usage
 
-1. Clone the repository
-2. Install dependencies (coming soon)
-3. Follow the tutorials in `src/docs/tutorials/`
-4. Run examples in `src/examples/`
+### Basic Example
 
-## Business Value Proposition
+```python
+from src.examples.basic.05_rag_with_knowledge_graph import KnowledgeGraphRAG
 
-Knowledge graphs enhance RAG applications by:
-1. Improving Context Understanding
-   - Better relationship modeling
-   - Richer context retrieval
-   - More accurate responses
+# Initialize the RAG system
+rag = KnowledgeGraphRAG()
 
-2. Reducing Hallucination
-   - Structured knowledge representation
-   - Verifiable information paths
-   - Confidence scoring
+# Sample text
+text = """
+Apple Inc. is a technology company headquartered in Cupertino, California.
+Steve Jobs and Steve Wozniak founded Apple in 1976.
+The company launched the iPhone in 2007, which revolutionized the smartphone industry.
+Tim Cook became CEO in 2011 after Steve Jobs stepped down.
+Apple's market value reached $3 trillion in 2022.
+"""
 
-3. Enabling Complex Queries
-   - Multi-hop reasoning
-   - Relationship-based queries
-   - Knowledge inference
+# Build the knowledge graph
+rag.build_from_text(text)
 
-4. Supporting Knowledge Management
-   - Structured knowledge capture
-   - Easy updates and maintenance
-   - Knowledge reuse
+# Ask questions
+questions = [
+    "Who founded Apple?",
+    "When was the iPhone launched?",
+    "What is Apple's market value?",
+    "Who is the current CEO of Apple?"
+]
 
-## Development Status
+for question in questions:
+    answer = rag.answer_question(question)
+    print(f"Q: {question}")
+    print(f"A: {answer}\n")
+```
 
-This project is under active development. Current focus:
-- [ ] Basic knowledge graph implementation
-- [ ] Simple RAG integration
-- [ ] Example use cases
-- [ ] Documentation and tutorials
+### Running Examples
+
+1. Basic Knowledge Graph:
+```bash
+python src/examples/basic/01_product_catalog.py
+```
+
+2. Complex Knowledge Graph:
+```bash
+python src/examples/basic/02_complex_product_catalog.py
+```
+
+3. Data-Driven Knowledge Graph:
+```bash
+python src/examples/basic/03_building_from_data.py
+```
+
+4. Unstructured Data Processing:
+```bash
+python src/examples/basic/04_unstructured_data.py
+```
+
+5. RAG System:
+```bash
+python src/examples/basic/05_rag_with_knowledge_graph.py
+```
+
+## Dependencies
+
+- networkx==3.2.1: Graph data structure
+- matplotlib==3.8.2: Visualization
+- graphviz==0.20.1: Graph visualization
+- spacy==3.7.2: Natural Language Processing
+- sentence-transformers==2.2.2: Text embeddings
+- scikit-learn==1.3.2: Machine learning utilities
+- huggingface-hub==0.16.4: Model management
+
+## How It Works
+
+1. **Text Processing**:
+   - Uses spaCy for entity recognition and relationship extraction
+   - Identifies entities (people, organizations, dates, etc.)
+   - Extracts relationships between entities
+
+2. **Knowledge Graph Construction**:
+   - Creates nodes for entities
+   - Creates edges for relationships
+   - Stores properties and metadata
+
+3. **Semantic Search**:
+   - Generates embeddings for nodes and relationships
+   - Uses cosine similarity for semantic matching
+   - Finds relevant information for questions
+
+4. **Question Answering**:
+   - Identifies relevant nodes and relationships
+   - Combines information into coherent answers
+   - Provides natural language responses
 
 ## Contributing
 
-Contributions are welcome! Please read our contributing guidelines (coming soon) before submitting pull requests.
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
 
 ## License
 
